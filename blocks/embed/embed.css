@@ -1,0 +1,23 @@
+main .embed {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+main .embed .embed-instagram {
+  width: 100%;
+  max-width: 540px;
+}
+
+/* Instagram injects inline styles; override margin so our centering applies */
+main .embed .instagram-media {
+  margin: 0 auto !important;
+  min-width: unset !important;
+  width: 100% !important;
+}
+
+@media (width >= 600px) {
+  main .embed {
+    padding: 2rem 0;
+  }
+}
