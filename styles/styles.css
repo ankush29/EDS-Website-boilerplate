@@ -295,6 +295,28 @@ main img {
   width: 100%;
 }
 
+/* icon inside a button: size down and add gap */
+a.button .icon,
+button.button .icon {
+  width: 1em;
+  height: 1em;
+  margin-inline-end: 0.4em;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* primary button has a dark background — invert icon to white */
+a.button.primary .icon img,
+button.button.primary .icon img {
+  filter: brightness(0) invert(1);
+}
+
+/* accent button has a blue background — invert icon to white */
+a.button.accent .icon img,
+button.button.accent .icon img {
+  filter: brightness(0) invert(1);
+}
+
 /* sections */
 main > .section {
   margin: 40px 0;
