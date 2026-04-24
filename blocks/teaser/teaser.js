@@ -1,37 +1,79 @@
 /**
  * Decorate a teaser block.
- * Expected row order: image, eyebrow, heading, description, CTA (all optional).
+ * Row order: image, eyebrow, heading, description, CTA (all optional).
+ * Works whether rows are wrapped in <p> tags or plain <div> text (CMS variance).
  * @param {Element} block the teaser block element
  */
 export default function decorate(block) {
-  const picture = block.querySelector('picture');
-  const heading = block.querySelector('h1, h2, h3, h4, h5, h6');
-  const cta = block.querySelector('.button-wrapper');
+  const cells = [...block.children].map((row) => row.firstElementChild);
 
-  // plain paragraphs only — no image holders, no button wrappers
-  const paras = [...block.querySelectorAll('p')].filter(
-    (p) => !p.querySelector('picture') && !p.classList.contains('button-wrapper'),
+  const imgCell = cells.find((c) => c?.querySelector('picture'));
+  const ctaCell = cells.find((c) => c?.querySelector('a[href]'));
+  const textCells = cells.filter(
+    (c) => c && c !== imgCell && c !== ctaCell && c.textContent.trim(),
   );
-  const [eyebrow, description] = paras;
+  const [eyebrowCell, headingCell, descCell] = textCells;
 
   const article = document.createElement('article');
 
-  if (picture) {
+  // image
+  if (imgCell) {
     const figure = document.createElement('figure');
-    figure.append(picture);
+    figure.append(imgCell.querySelector('picture'));
     article.append(figure);
   }
 
   const content = document.createElement('div');
   content.className = 'teaser-content';
 
-  if (eyebrow) {
-    eyebrow.className = 'teaser-eyebrow';
-    content.append(eyebrow);
+  // eyebrow
+  if (eyebrowCell) {
+    const p = document.createElement('p');
+    p.className = 'teaser-eyebrow';
+    p.textContent = eyebrowCell.textContent.trim();
+    content.append(p);
   }
-  if (heading) content.append(heading);
-  if (description) content.append(description);
-  if (cta) content.append(cta);
+
+  // heading — promote plain text to <h2> if the CMS didn't add a heading tag
+  if (headingCell) {
+    const existing = headingCell.querySelector('h1, h2, h3, h4, h5, h6');
+    if (existing) {
+      content.append(existing);
+    } else {
+      const h2 = document.createElement('h2');
+      h2.textContent = headingCell.textContent.trim();
+      content.append(h2);
+    }
+  }
+
+  // description
+  if (descCell) {
+    const existing = descCell.querySelector('p');
+    if (existing) {
+      content.append(existing);
+    } else {
+      const p = document.createElement('p');
+      p.textContent = descCell.textContent.trim();
+      content.append(p);
+    }
+  }
+
+  // CTA — works whether decorateButtons has already run or not
+  if (ctaCell) {
+    const buttonWrapper = ctaCell.querySelector('.button-wrapper');
+    if (buttonWrapper) {
+      content.append(buttonWrapper);
+    } else {
+      const a = ctaCell.querySelector('a[href]');
+      if (a) {
+        a.className = 'button primary';
+        const wrapper = document.createElement('p');
+        wrapper.className = 'button-wrapper';
+        wrapper.append(a);
+        content.append(wrapper);
+      }
+    }
+  }
 
   article.append(content);
   block.replaceChildren(article);
