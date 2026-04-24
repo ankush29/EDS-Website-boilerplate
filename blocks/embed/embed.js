@@ -1,3 +1,5 @@
+import { loadScript } from '../../scripts/aem.js';
+
 const INSTAGRAM_ORIGINS = ['www.instagram.com', 'instagram.com'];
 const INSTAGRAM_PATH = /^\/(p|reel|tv)\/([^/?#]+)/;
 
@@ -6,7 +8,6 @@ function getInstagramPermalink(url) {
     const { hostname, pathname } = new URL(url);
     if (!INSTAGRAM_ORIGINS.includes(hostname)) return null;
     if (!INSTAGRAM_PATH.test(pathname)) return null;
-    // Normalize to canonical permalink
     const [, type, id] = pathname.match(INSTAGRAM_PATH);
     return `https://www.instagram.com/${type}/${id}/`;
   } catch {
@@ -14,16 +15,12 @@ function getInstagramPermalink(url) {
   }
 }
 
-function loadEmbedScript() {
+async function loadEmbedScript() {
   if (window.instgrm) {
     window.instgrm.Embeds.process();
     return;
   }
-  if (document.querySelector('script[src*="instagram.com/embed.js"]')) return;
-  const script = document.createElement('script');
-  script.src = 'https://www.instagram.com/embed.js';
-  script.async = true;
-  document.head.append(script);
+  await loadScript('https://www.instagram.com/embed.js', { async: '' });
 }
 
 function createEmbed(permalink) {
@@ -45,7 +42,7 @@ function createEmbed(permalink) {
  * Decorate an embed block containing an Instagram URL.
  * @param {Element} block the embed block element
  */
-export default function decorate(block) {
+export default async function decorate(block) {
   const anchor = block.querySelector('a[href]');
   if (!anchor) return;
 
