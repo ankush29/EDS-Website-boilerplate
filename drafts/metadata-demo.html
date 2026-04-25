@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>EDS Website – Edge Delivery Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- ✅ These <meta> tags are what AEM generates from the Metadata block below -->
+    <meta name="description" content="Build ultra-fast websites with AEM Edge Delivery Services. Author in familiar tools and ship experiences that score 100 on PageSpeed."/>
+    <meta name="keywords" content="technology, web, aem, edge delivery"/>
+    <meta name="template" content="article"/>
+    <meta name="theme" content="dark"/>
+
+    <!-- Open Graph (social sharing) -->
+    <meta property="og:title" content="EDS Website – Edge Delivery Demo"/>
+    <meta property="og:description" content="Build ultra-fast websites with AEM Edge Delivery Services."/>
+    <meta property="og:image" content="https://picsum.photos/seed/og/1200/630"/>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="EDS Website – Edge Delivery Demo"/>
+    <meta name="twitter:image" content="https://picsum.photos/seed/og/1200/630"/>
+
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css"/>
+    <link rel="stylesheet" href="/styles/lazy-styles.css"/>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        <h1>Metadata Block Demo</h1>
+        <p>This page demonstrates all six metadata fields. Check the page <code>&lt;head&gt;</code> in DevTools to see the generated <code>&lt;meta&gt;</code> tags.</p>
+        <p>The <strong>Theme</strong> and <strong>Template</strong> values are also added as CSS classes on <code>&lt;body&gt;</code> by <code>decorateTemplateAndTheme()</code> in aem.js.</p>
+      </div>
+
+      <!-- Metadata block — placed at the bottom of the page by convention.
+           On the live AEM site the backend converts this table into <meta> tags
+           in the <head> and removes the block from the DOM entirely. -->
+      <div>
+        <div class="metadata block" data-block-name="metadata">
+          <div><div>Title</div><div>EDS Website – Edge Delivery Demo</div></div>
+          <div><div>Description</div><div>Build ultra-fast websites with AEM Edge Delivery Services. Author in familiar tools and ship experiences that score 100 on PageSpeed.</div></div>
+          <div><div>Image</div><div><img src="https://picsum.photos/seed/og/1200/630" alt="OG image"/></div></div>
+          <div><div>Theme</div><div>dark</div></div>
+          <div><div>Template</div><div>article</div></div>
+          <div><div>Tags</div><div>technology, web, aem</div></div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
