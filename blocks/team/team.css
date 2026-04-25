@@ -52,3 +52,25 @@ main .team .team-bio {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* pagination */
+main .team .team-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+main .team .team-pagination-info {
+  font-size: var(--body-font-size-s);
+  color: var(--dark-color);
+  min-width: 8ch;
+  text-align: center;
+}
+
+main .team .team-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
