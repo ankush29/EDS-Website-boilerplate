@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /drafts/
+Disallow: /shared/
+Disallow: /data/
+Disallow: /fragment/
+Disallow: /fragments/
+
+Sitemap: https://main--eds-website-boilerplate--ankush29.aem.live/sitemap.xml
