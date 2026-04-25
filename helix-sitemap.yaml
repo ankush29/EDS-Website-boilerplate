@@ -1,0 +1,6 @@
+sitemaps:
+  site:
+    source: /query-index.json
+    destination: /sitemap.xml
+    origin: https://main--eds-website-boilerplate--ankush29.aem.live
+    lastmod: YYYY-MM-DD
