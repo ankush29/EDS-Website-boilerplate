@@ -11,6 +11,7 @@ indices:
       - '/fragments/**'
       - '/fragment/**'
       - '/data/**'
+      - '/shared/**'
     target: /query-index.xlsx
     properties:
       title:
