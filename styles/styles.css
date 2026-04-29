@@ -11,13 +11,16 @@
  */
 
 :root {
-  /* colors */
+  /* WKND brand colors */
   --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --light-color: #f4f4f4;
+  --dark-color: #18232d;
+  --text-color: #333;
+  --link-color: #e8572a;
+  --link-hover-color: #c44420;
+  --color-brand-primary: #e8572a;
+  --color-brand-dark: #18232d;
+  --color-brand-accent: #ffc600;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -344,4 +347,34 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+main .section.dark {
+  background-color: var(--dark-color);
+  color: white;
+  margin: 0;
+  padding: 60px 0;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3,
+main .section.dark h4,
+main .section.dark p {
+  color: white;
+}
+
+main .section.dark a:any-link {
+  color: rgb(255 255 255 / 85%);
+}
+
+main .section.dark a.button.primary {
+  background-color: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: white;
+}
+
+main .section.dark a.button.secondary {
+  border-color: rgb(255 255 255 / 60%);
+  color: white;
 }

@@ -1,20 +1,24 @@
-function decorate(block) {
-  const titles = block.querySelectorAll(':scope > div:nth-child(odd)');
-  titles.forEach((title) => {
-    // Add a class to the title container
-    title.classList.add('item-title');
-    // // Remove the empty div
-    // title.querySelector(':scope > div:last-of-type').remove();
-    // Add a class to the content
-    title.nextElementSibling.classList.add('item-content');
-    // Add a click handler to open the content
-    title.addEventListener('click', () => {
-      title.classList.toggle('open');
+export default function decorate(block) {
+  [...block.children].forEach((row) => {
+    const [titleCell, contentCell] = row.children;
+    if (!titleCell || !contentCell) return;
+
+    titleCell.classList.add('accordion-item-title');
+    contentCell.classList.add('accordion-item-content');
+    contentCell.hidden = true;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'accordion-item-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = `<span>${titleCell.innerHTML}</span><span class="accordion-icon" aria-hidden="true"></span>`;
+    titleCell.textContent = '';
+    titleCell.append(btn);
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      contentCell.hidden = expanded;
     });
   });
 }
-
-const els = document.querySelectorAll('.accordion');
-els.forEach((block) => {
-  decorate(block);
-});

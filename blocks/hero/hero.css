@@ -5,33 +5,91 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: white;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgb(24 35 45 / 80%) 0%, rgb(24 35 45 / 35%) 100%);
+  z-index: 1;
 }
 
 .hero picture {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  z-index: 0;
 }
 
 .hero img {
-  object-fit: cover;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+.hero .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero .hero-content-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.hero h1 {
+  color: white;
+  font-size: var(--heading-font-size-xxl);
+  margin-top: 0;
+  margin-bottom: 0.4em;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 40%);
+  max-width: 720px;
+}
+
+.hero p {
+  color: rgb(255 255 255 / 90%);
+  font-size: var(--body-font-size-s);
+  max-width: 600px;
+  margin-bottom: 0.5em;
+}
+
+.hero .button-wrapper {
+  margin-top: 24px;
+}
+
+.hero a.button.primary {
+  background-color: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: white;
+}
+
+.hero a.button.primary:hover {
+  background-color: var(--link-hover-color);
+  border-color: var(--link-hover-color);
+}
+
+.hero a.button.secondary {
+  border-color: white;
+  color: white;
+}
+
+.hero a.button.secondary:hover {
+  background-color: rgb(255 255 255 / 15%);
 }
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 700px;
+  }
+
+  .hero .hero-content-inner {
+    padding: 120px 32px;
   }
 }

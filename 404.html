@@ -7,13 +7,13 @@
     content="script-src 'nonce-aem' 'strict-dynamic' 'unsafe-inline' http: https:; base-uri 'self'; object-src 'none';"
     move-to-http-header="true"
   >
-  <title>Page not found</title>
+  <title>Page not found – WKND Magazine</title>
   <script nonce="aem" type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Page not found">
+  <meta property="og:title" content="Page not found – WKND Magazine">
   <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
   <script nonce="aem" type="module">
     window.addEventListener('load', () => {
@@ -21,12 +21,12 @@
         const { origin, pathname } = new URL(document.referrer);
         if (origin === window.location.origin) {
           const backBtn = document.createElement('a');
-          backBtn.classList.add('button', 'error-button-back');
+          backBtn.classList.add('button', 'secondary', 'error-button-back');
           backBtn.href = pathname;
           backBtn.textContent = 'Go back';
           backBtn.title = 'Go back';
           const btnContainer = document.querySelector('.button-container');
-          btnContainer.append(backBtn);
+          if (btnContainer) btnContainer.append(backBtn);
         }
       }
     });
@@ -37,19 +37,43 @@
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
+    body { background-color: #18232d; color: white; }
+
+    header .header, footer .footer { display: none; }
+
     main.error {
-      min-height: calc(100vh - var(--nav-height));
+      min-height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
     }
 
-    main.error .error-number {
-      width: 100%;
+    main.error .section > div { max-width: 560px; margin: 0 auto; }
+
+    main.error .error-eyebrow {
+      font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #e8572a; font-weight: 700; margin-bottom: 12px;
     }
 
-    main.error .error-number text {
-      font-family: monospace;
+    main.error .error-number { width: 200px; height: auto; margin: 0 auto 24px; display: block; }
+
+    main.error .error-number text { font-weight: 700; fill: white; }
+
+    main.error .error-message { font-size: clamp(24px, 5vw, 36px); color: white; }
+
+    main.error .error-description {
+      color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 28px;
     }
+
+    main.error .button-container {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 0;
+    }
+
+    main.error a.button.primary { background-color: #e8572a; border-color: #e8572a; color: white; }
+
+    main.error a.button.secondary { border-color: rgba(255,255,255,0.5); color: white; }
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
 </head>
@@ -58,13 +82,18 @@
   <header></header>
   <main class="error">
     <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
+      <div>
+        <p class="error-eyebrow">404 Error</p>
+        <svg viewBox="0 0 160 60" class="error-number" aria-hidden="true">
+          <text x="0" y="56" font-size="72" font-family="monospace">404</text>
+        </svg>
+        <h2 class="error-message">Page Not Found</h2>
+        <p class="error-description">The page you're looking for has gone off the beaten path. Let's get you back on trail.</p>
+        <p class="button-container">
+          <a href="/" class="button primary error-button-home">Go home</a>
+          <a href="/magazine" class="button secondary">Browse Magazine</a>
+        </p>
+      </div>
     </div>
   </main>
   <footer></footer>
